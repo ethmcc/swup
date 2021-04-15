@@ -463,8 +463,11 @@ var Swup = function () {
 						// get custom transition from data
 						var customTransition = event.delegateTarget.getAttribute('data-swup-transition');
 
+						// check for custom history instructions
+						var noPushHistory = this.options.optionPushHistory ? event.delegateTarget.hasAttribute('data-swup-no-push-history') : false;
+
 						// load page
-						this.loadPage({ url: link.getAddress(), customTransition: customTransition }, false);
+						this.loadPage({ url: link.getAddress(), customTransition: customTransition, noPushHistory: noPushHistory }, false);
 					}
 				}
 			} else {
@@ -686,8 +689,9 @@ var loadPage = function loadPage(data, popstate) {
 			_this.triggerEvent('animationOutDone');
 		});
 
-		// create history record if this is not a popstate call
-		if (!popstate) {
+		// create history record if this is not a popstate call 
+		// and noPushHistory hasn't been specified
+		if (!popstate && !data.noPushHistory) {
 			// create pop element with or without anchor
 			var state = void 0;
 			if (_this.scrollToElement != null) {
