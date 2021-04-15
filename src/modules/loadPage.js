@@ -22,8 +22,9 @@ const loadPage = function(data, popstate) {
 			this.triggerEvent('animationOutDone');
 		});
 
-		// create history record if this is not a popstate call
-		if (!popstate) {
+		// create history record if this is not a popstate call 
+		// and noPushHistory hasn't been specified
+		if (!popstate && !data.noPushHistory) {
 			// create pop element with or without anchor
 			let state;
 			if (this.scrollToElement != null) {

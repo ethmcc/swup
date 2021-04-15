@@ -226,9 +226,14 @@ export default class Swup {
 						'data-swup-transition'
 					);
 
+					// check for custom history instructions
+					let noPushHistory = (this.options.optionPushHistory) ? 
+										event.delegateTarget.hasAttribute('data-swup-no-push-history') : 
+										false;
+
 					// load page
 					this.loadPage(
-						{ url: link.getAddress(), customTransition: customTransition },
+						{ url: link.getAddress(), customTransition: customTransition, noPushHistory: noPushHistory },
 						false
 					);
 				}
